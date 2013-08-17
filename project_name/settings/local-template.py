@@ -17,7 +17,7 @@ SESSION_COOKIE_DOMAIN = ''
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DATABASES.update({
+_DATABASES ={
     'pgsql': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': '{{ project_name }}',
@@ -25,7 +25,7 @@ DATABASES.update({
         'PASSWORD': '',
         'HOST': 'localhost',
     },
-})
+}
 
 CACHES.update({
     'locmem': {
