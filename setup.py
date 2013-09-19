@@ -130,7 +130,7 @@ setup(
     setup_requires=setup_requires,
     entry_points={
         'console_scripts': [
-            'stock-manage = {{ project_name }}.custom_manage:main',
+            '{{ project_name }}_manage = {{ project_name }}.custom_manage:main',
         ],
     },
 )
