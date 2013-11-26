@@ -1,4 +1,4 @@
-from django.conf.urls import *
+from django.conf.urls import url, include, patterns
 from django.contrib import admin
 from django.conf import settings
 
@@ -11,7 +11,7 @@ urlpatterns = patterns(
     # url(r'^', include('ella.core.urls')),
 )
 
-if settings.DEBUG:
+if getattr(settings, 'DEBUG_URLS', False):
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     from django.conf.urls.static import static
 

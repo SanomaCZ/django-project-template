@@ -15,3 +15,5 @@ dist/
 
 .coverage
 nosetests.xml
+
+.idea

@@ -1,5 +1,5 @@
-from django.utils.timezone import now
 from django.conf import settings
+#from django.utils.timezone import now
 
 
 VARIABLES = {
@@ -8,6 +8,7 @@ VARIABLES = {
     'DEBUG_SCRIPTS': getattr(settings, 'DEBUG_SCRIPTS', False),
     'STATIC_URL': getattr(settings, 'STATIC_URL'),
     'MEDIA_URL': getattr(settings, 'MEDIA_URL'),
+    #'COMMON_STATIC_URL': settings.COMMON_STATIC_URL
 }
 
 

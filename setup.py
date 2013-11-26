@@ -1,28 +1,27 @@
 from os import system
 from os.path import dirname, join
-from setuptools import setup
+from setuptools import setup, find_packages
 from distutils.core import Command
 import {{ project_name }}
 
 install_requires = [
-    'Django>=1.5.1,<1.6',
-    'South>=0.8.1',
-    'Pillow>=2.0',
-    'raven==3.3.7',
-
-    'pyelasticsearch>=0.5',
-    'django-haystack>=2.0',
-
+    'Django==1.6',
+    'South==0.8.3',
     'hiredis',
-    'redis',
-    'django-redis',
-    'django-taggit==0.10a1',
+    'redis==2.8.0',
     'sorl-thumbnail==11.12',
+    'templatefinder',
+    'django-redis==3.3',
+    'raven==3.5.2',
+    'Pillow==2.2.1',
+    'uwsgi==1.9.20',
+    'markdown2==2.1.0',
 ]
 
 tests_require = [
     'nose',
     'coverage',
+    'mock'
 ]
 
 setup_requires = []
@@ -97,10 +96,15 @@ setup(
     long_description=long_description,
     author='Sanoma Online Dev',
     author_email='online-dev@sanomamedia.cz',
+    maintainer='Michal Dub',
+    maintainer_email='Michal.Dub@sanomamedia.cz',
     license='Proprietal',
     #url='',
 
-    packages=('{{ project_name }}',),
+    packages=find_packages(
+        where='.',
+        exclude=('docs', 'tests',)
+    ),
     include_package_data=True,
 
     cmdclass={

@@ -11,20 +11,21 @@ TEMPLATE_DEBUG = True
 DEBUG_STYLES = True
 DEBUG_SCRIPTS = True
 DEBUG_TOOLBAR = False
+DEBUG_THUMBNAIL = True
+DEBUG_URLS = True
 
-DISABLE_ABSOLUTE_URI_TAG = True  # if not set base page urls will use absolute urls
 SESSION_COOKIE_DOMAIN = ''
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 _DATABASES ={
-    'pgsql': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{ project_name }}',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-    },
+#     'pgsql': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': '{{ project_name }}',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#     },
 }
 
 CACHES.update({

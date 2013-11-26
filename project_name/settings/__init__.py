@@ -8,9 +8,10 @@ import sys
 from {{ project_name }} import __versionstr__
 from {{ project_name }}.settings.base import *
 
-SERVER_CONFIGURATION_DIR = '/usr/local/etc/sanoma/'
-sys.path.insert(0, SERVER_CONFIGURATION_DIR)
+SERVER_CONFIGURATION_FILE = '/usr/local/etc/sanoma/{{ project_name }}/'
 
+# server-specific settings
+sys.path.insert(0, SERVER_CONFIGURATION_FILE)
 try:
     from {{ project_name }}_conf import *
 except ImportError:
@@ -25,11 +26,12 @@ try:
 except ImportError:
     pass
 
-#append version to STATIC_URL to invalidate old statics
-STATIC_URL = '%sv%s/' % (STATIC_URL, __versionstr__)
+#append package version to STATIC_URL to invalidate old statics
+VERSION_STAMP = __versionstr__.replace(".", "")
+STATIC_URL = '%sversion%s/' % (STATIC_URL, VERSION_STAMP)
 
-# try to bump cache version by project version to avoid memcache reload
+# try to bump cache version by project version
 try:
-    CACHES['default']['VERSION'] = __versionstr__
+    CACHES['default']['VERSION'] = VERSION_STAMP
 except KeyError:
     pass

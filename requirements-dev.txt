@@ -1,8 +1,9 @@
 -r requirements.txt
-
 nose
+mock
 coverage
-
 django-debug-toolbar
 https://github.com/WoLpH/Cache-Debug-Toolbar/archive/master.zip#egg=cache_toolbar
 pip-tools
+
+gitolite@git.smdev.cz:sm-deployment

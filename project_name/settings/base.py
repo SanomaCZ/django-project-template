@@ -3,12 +3,13 @@ from os.path import join, dirname, pardir, abspath
 PROJECT_ROOT = abspath(join(dirname(__file__), pardir))
 DEV_TMP_DIR = join(PROJECT_ROOT, pardir, '.devtmp')
 
-DEBUG = True
-TEMPLATE_DEBUG = True
-DEBUG_STYLES = True
-DEBUG_SCRIPTS = True
+DEBUG = False
+TEMPLATE_DEBUG = False
+DEBUG_STYLES = False
+DEBUG_SCRIPTS = False
 DEBUG_TOOLBAR = False
-DEBUG_THUMBNAIL = True
+DEBUG_THUMBNAIL = False
+DEBUG_URLS = False
 
 ADMINS = ()
 MANAGERS = ADMINS
@@ -65,6 +66,7 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = join(DEV_TMP_DIR, 'static')
 STATIC_URL = '/static/'
+#COMMON_STATIC_URL = 'http://static-mona-cz.fix-i.net/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -75,8 +77,7 @@ STATICFILES_DIRS = (
 )
 
 # NOTE: development settings, use real secret key in your production
-if DEBUG:
-    SECRET_KEY = '0123456789' * 5
+SECRET_KEY = '{{ secret_key }}'
 
 # NOTE: this is development, define cached loaders in production settings
 TEMPLATE_LOADERS = (
@@ -87,10 +88,11 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'raven.contrib.django.middleware.SentryResponseErrorIdMiddleware',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -103,9 +105,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    # 'django.core.context_processors.debug',
-
+    #'django.core.context_processors.request',
     # static/media url, debug variables etc.
     '{{ project_name }}.context_processors.settings_variables',
 )
@@ -134,76 +134,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 SESSION_COOKIE_DOMAIN = ''
 
-# search haystack / ES configuration
-# haystack search
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'sm_search_common.backend.elasticsearch.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': '{{ project_name }}',
-    },
-}
-
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 15
-HAYSTACK_ELASTICSEARCH_SETTINGS = {
-    "settings": {
-        "analysis": {
-            "analyzer": {
-                "default": {
-                    "tokenizer": "lowercase",
-                    "filter": ["asciifolding", "standard", "stop", "cz_stemmer"],
-                    "char_filter": ["html_strip"],
-                    "alias": ["snowball"]
-                },
-                "ngram_analyzer": {
-                    "type": "custom",
-                    "tokenizer": "lowercase",
-                    "filter": ["haystack_ngram"]
-                },
-                "edgengram_analyzer": {
-                    "type": "custom",
-                    "tokenizer": "lowercase",
-                    "filter": ["haystack_edgengram"]
-                }
-            },
-            "tokenizer": {
-                "haystack_ngram_tokenizer": {
-                    "type": "nGram",
-                    "min_gram": 3,
-                    "max_gram": 15
-                },
-                "haystack_edgengram_tokenizer": {
-                    "type": "edgeNGram",
-                    "min_gram": 2,
-                    "max_gram": 15,
-                    "side": "front"
-                }
-            },
-            "filter": {
-                "stop": {
-                    "type": "stop",
-                    "stopwords_path": "stopwords.txt"
-                },
-                "cz_stemmer": {
-                    "type": "stemmer",
-                    "name": "czech"
-                },
-                "haystack_ngram": {
-                    "type": "nGram",
-                    "min_gram": 3,
-                    "max_gram": 15
-                },
-                "haystack_edgengram": {
-                    "type": "edgeNGram",
-                    "min_gram": 2,
-                    "max_gram": 15
-                }
-            }
-        }
-    }
-}
-
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -213,14 +143,17 @@ LOGGING = {
     },
     'formatters': {
         'default': {
-            'format': '%(levelname)s\t%(name)s\t%(lineno)s\t%(message)s',
+            'format': '%(levelname)s\t%(asctime)s\t%(name)s\t%(lineno)s\t%(message)s',
         },
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        }
     },
     'handlers': {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': '/dev/null',
+            'filename': '/tmp/{{ project_name }}.log',
             'formatter': 'default',
         },
         'console': {
@@ -234,3 +167,6 @@ LOGGING = {
         },
     },
 }
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+#THUMBNAIL_ORIENTATION = False
