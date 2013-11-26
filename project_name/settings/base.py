@@ -66,7 +66,7 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = join(DEV_TMP_DIR, 'static')
 STATIC_URL = '/static/'
-#COMMON_STATIC_URL = 'http://static-mona-cz.fix-i.net/'
+COMMON_STATIC_URL = 'http://static-mona-cz.fix-i.net/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (

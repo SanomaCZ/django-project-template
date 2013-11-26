@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="description" content="{% block description %}{% endblock description %}">
+	{% block extra_meta %}{% endblock extra_meta %}
+	<link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.png">
+	<link href="{{ COMMON_STATIC_URL }}styles/servicebar.css" rel="stylesheet" media="screen">
+	{% if DEBUG_STYLES %}
+		<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/master.less" media="all">
+		<script src="{{ STATIC_URL }}_dev/less-1.4.1.min.js"></script>
+	{% else %}
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/master.css" media="all">
+	{% endif %}
+	{% block extra_head %}
+	<meta property="fb:app_id" content="">
+	<meta name="og:site_name" content="">
+	<meta name="og:url" content=""> 
+	<meta name="og:title" content=""> 
+	<meta name="og:image" content="">
+	{% endblock %}
+	
+	{% block measure %}
+	{% endblock measure %}
+</head>
+<body>
+	
+{% block header %}{% endblock header %}
+
+<div class="content {% block extra_content_class %}{% endblock %}">
+	{% block content %}{% endblock %}
+</div>
+
+{% block footer %}
+<footer class="footer-main clearfix">
+	<p>2008 - {% now "Y" %} &copy; <a href="http://www.sanomamedia.cz/">Sanoma Media Praha s.r.o.</a></p>
+	<p>Všechna práva vyhrazena</p>
+</footer>
+{% endblock footer %}
+
+{% block bottom_scripts %}
+{% if DEBUG_SCRIPTS %}
+	<script src="{{ STATIC_URL }}_dev/jquery-1.10.2.min.js"></script>
+	<script src="{{ STATIC_URL }}js/base.js"></script>
+{% else %}
+	<script src="{{ STATIC_URL }}js/common.js"></script>
+{% endif %}
+	<script src="{{ COMMON_STATIC_URL }}scripts/serviceBar.js"></script>
+	<script>
+		$(function () {
+		/** SERVICEBAR */
+		if (typeof ServiceBar != "undefined") {
+			var sanomaBar = new ServiceBar({
+				utm_source: 'xyz'
+			});
+			sanomaBar.init();
+		}
+		});
+		/** EOF SERVICEBAR */
+	</script>
+{% endblock bottom_scripts %}
+</body>
+</html>
