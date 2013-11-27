@@ -39,7 +39,7 @@ class Project(BaseProject):
         'git': 'git+gitolite@git.smdev.cz:%(repo_name)s#egg={{ project_name }}',
     }
 
-    supervisor_name = '%(supervisor_name)s-web'
+    supervisor_name = '%(supervisor_name)s'
 
     global_entry_points = ['{{ project_name }}_manage']
 
