@@ -82,7 +82,8 @@ class MakeStatic(Command):
     def run(self):
         params = {
             'pth': '{{ project_name }}/project_static',
-            'lessc_opts': '--yui-compress --verbose -O2',
+            #'lessc_opts': '--yui-compress --verbose -O2',
+            'lessc_opts': '--compress --clean-css --verbose -O2',
             'xjs_opts': ''
         }
         system('lessc %(lessc_opts)s %(pth)s/less/master.less %(pth)s/css/master.css' % params)
