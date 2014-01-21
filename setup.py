@@ -91,9 +91,9 @@ class MakeStatic(Command):
 
 
 setup(
-    name='{{ project_name }}',
+    name='%(repo_name)s',
     version={{ project_name }}.__versionstr__,
-    description='{{ project_name }}',
+    description='%(repo_name)s',
     long_description=long_description,
     author='Sanoma Online Dev',
     author_email='online-dev@sanomamedia.cz',
