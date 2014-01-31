@@ -5,7 +5,7 @@ from distutils.core import Command
 import {{ project_name }}
 
 install_requires = [
-    'Django==1.6',
+    'Django==1.6.1',
     'South==0.8.3',
     'hiredis',
     'redis==2.8.0',
