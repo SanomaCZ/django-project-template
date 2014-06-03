@@ -5,18 +5,14 @@ from distutils.core import Command
 import {{ project_name }}
 
 install_requires = [
-    'Django==1.6.1',
-    'South==0.8.3',
-    'hiredis',
-    'redis==2.8.0',
-    'sorl-thumbnail==11.12',
-    'templatefinder',
-    'django-redis==3.3',
-    'raven==3.5.2',
-    'Pillow==2.2.1',
-    'uwsgi==1.9.20',
-    'markdown2==2.1.0',
+    #'uwsgi==2.0.5.1',
+    'gunicorn 18.0'
 ]
+with open(join(dirname(__file__), 'requirements.txt')) as req_file:
+    for l in req_file.readlines():
+        l = l.strip()
+        if l and not l.startswith('#'):
+            install_requires.append(l)
 
 tests_require = [
     'nose',
@@ -95,10 +91,10 @@ setup(
     version={{ project_name }}.__versionstr__,
     description='%(repo_name)s',
     long_description=long_description,
-    author='Sanoma Online Dev',
-    author_email='online-dev@sanomamedia.cz',
+    author='Astrosat Media Online Dev',
+    author_email='online-dev@astrosatmedia.cz',
     maintainer='Michal Dub',
-    maintainer_email='Michal.Dub@sanomamedia.cz',
+    maintainer_email='Michal.Dub@astrosatmedia.cz',
     license='Proprietal',
     #url='',
 

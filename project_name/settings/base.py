@@ -66,7 +66,7 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = join(DEV_TMP_DIR, 'static')
 STATIC_URL = '/static/'
-COMMON_STATIC_URL = 'http://static-mona-cz.fix-i.net/'
+COMMON_STATIC_URL = 'http://static.common.vlp.cz/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -127,7 +127,7 @@ INSTALLED_APPS = (
 
     '{{ project_name }}',
 
-    #'sorl.thumbnail',
+    'sorl.thumbnail',
 )
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'

@@ -6,7 +6,7 @@ from deployment.machines import Machine
 from deployment.base import TestMachine, Deployment as BaseDeployment
 
 
-class NetworkMachine(Machine):
+class VLPMachine(Machine):
     """
     Use only as mixin
     """
@@ -25,8 +25,6 @@ class NetworkMachine(Machine):
     ln_packages = (
         '/usr/lib/python2.7/dist-packages/psycopg2-2.4.5.egg-info',
         '/usr/lib/python2.7/dist-packages/psycopg2',
-        #'/usr/lib/python2.6/dist-packages/PIL.pth',
-        #'/usr/lib/python2.6/dist-packages/PIL',
     )
 
 
@@ -45,17 +43,11 @@ class Project(BaseProject):
 
 
 class TestDeployment(BaseDeployment, TestMachine, Project):
-    ln_packages = (
-        '/usr/lib/python2.6/dist-packages/psycopg2-2.2.1.egg-info',
-        '/usr/lib/python2.6/dist-packages/mx',
-        '/usr/lib/python2.6/dist-packages/psycopg2',
-        #'/usr/lib/python2.6/dist-packages/PIL.pth',
-        #'/usr/lib/python2.6/dist-packages/PIL',
-    )
+    pass
 
 
-class NetworkDeployment(BaseDeployment, NetworkMachine, Project):
+class VLPDeployment(BaseDeployment, VLPMachine, Project):
     pass
 
 {{ project_name }}_on_test = TestDeployment()
-{{ project_name }}_on_production = NetworkDeployment()
+{{ project_name }}_on_production = VLPDeployment()
