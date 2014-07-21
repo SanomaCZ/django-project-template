@@ -2,30 +2,8 @@
 # fab {{ project_name }}_on_test:update --hosts="sshanoma@test.smdev.cz"
 
 from deployment.projects import Project as BaseProject
-from deployment.machines import Machine
+from deployment.machines import VLPMachine
 from deployment.base import TestMachine, Deployment as BaseDeployment
-
-
-class VLPMachine(Machine):
-    """
-    Use only as mixin
-    """
-
-    use_sudo = True
-    use_nginx_in_supervisor = False
-    python_version = 'python2.7'
-
-    minion_user = '%(minion_user)s'
-
-    forward_agent = True
-    use_ssh_config = True
-
-    etc_prefix = '/usr/local/etc'
-
-    ln_packages = (
-        '/usr/lib/python2.7/dist-packages/psycopg2-2.4.5.egg-info',
-        '/usr/lib/python2.7/dist-packages/psycopg2',
-    )
 
 
 class Project(BaseProject):
