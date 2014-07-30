@@ -6,7 +6,7 @@ import {{ project_name }}
 
 install_requires = [
     #'uwsgi==2.0.5.1',
-    'gunicorn 18.0'
+    'gunicorn 19.1'
 ]
 with open(join(dirname(__file__), 'requirements.txt')) as req_file:
     for l in req_file.readlines():
@@ -129,9 +129,5 @@ setup(
     test_suite='nose.collector',
     tests_require=tests_require,
     setup_requires=setup_requires,
-    entry_points={
-        'console_scripts': [
-            '{{ project_name }}_manage = {{ project_name }}.custom_manage:main',
-        ],
-    },
+    scripts=['manage.py'],
 )
