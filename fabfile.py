@@ -17,8 +17,6 @@ class Project(BaseProject):
 
     supervisor_name = '%(supervisor_name)s'
 
-    global_entry_points = ['{{ project_name }}_manage']
-
 
 class TestDeployment(BaseDeployment, TestMachine, Project):
     pass
