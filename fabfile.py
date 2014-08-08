@@ -9,12 +9,7 @@ from deployment.base import TestMachine, Deployment as BaseDeployment
 class Project(BaseProject):
 
     project_name = '{{ project_name }}'
-
-    repo_sources = {
-        'pypi': '%(repo_name)s',
-        'git': 'git+gitolite@git.smdev.cz:%(repo_name)s#egg={{ project_name }}',
-    }
-
+    repo_name = '%(repo_name)s'
     supervisor_name = '%(supervisor_name)s'
 
 
