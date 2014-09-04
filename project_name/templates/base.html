@@ -1,3 +1,4 @@
+{% load common %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -52,12 +53,11 @@
 {% endblock footer %}
 
 {% block bottom_scripts %}
-{% if DEBUG_SCRIPTS %}
-	<script src="{{ STATIC_URL }}_dev/jquery-1.10.2.min.js"></script>
-	<script src="{{ STATIC_URL }}js/base.js"></script>
-{% else %}
-	<script src="{{ STATIC_URL }}js/common.js"></script>
-{% endif %}
+	{% if DEBUG_SCRIPTS %}
+		{% devel_js_scripts %}
+	{% else %}
+		<script src="{{ STATIC_URL }}js/common.min.js"></script>
+	{% endif %}
 	<script src="{{ COMMON_STATIC_URL }}scripts/serviceBar.js"></script>
 	<script>
 		$(function () {

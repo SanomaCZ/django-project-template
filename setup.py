@@ -1,3 +1,4 @@
+import json
 from os import system
 from os.path import dirname, join
 from setuptools import setup, find_packages
@@ -80,10 +81,20 @@ class MakeStatic(Command):
             'pth': '{{ project_name }}/project_static',
             #'lessc_opts': '--yui-compress --verbose -O2',
             'lessc_opts': '--compress --clean-css --verbose -O2',
-            'xjs_opts': ''
+            'minjs_opts': '-mc'
         }
         system('lessc %(lessc_opts)s %(pth)s/less/master.less %(pth)s/css/master.css' % params)
-        system('r.js %(xjs_opts)s -o %(pth)s/_dev/build.js' % params)
+
+        # minify javascript according to .../_dev/build.json to `.../js/$key.min.js`
+        build_file = join(params['pth'], '_dev', 'build.json')
+        js_dir = join(params['pth'], 'js')
+        with open(build_file, 'r') as fp:
+            for outfile, files in json.load(fp).iteritems():
+                system('uglifyjs %(files)s %(opts)s -o %(output)s' % {
+                    'files': ' '.join(join(params['pth'], f) for f in files),
+                    'output': join(js_dir, '%s.min.js' % outfile),
+                    'opts': params['minjs_opts'],
+                })
 
 
 setup(
