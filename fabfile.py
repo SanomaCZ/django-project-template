@@ -1,9 +1,8 @@
 # example:
-# fab {{ project_name }}_on_test:update --hosts="sshanoma@test.smdev.cz"
+# fab test:update --hosts="lala@test.smdev.cz"
 
 from deployment.projects import ManagePyProject as BaseProject
-from deployment.machines import ProductionMachine, TestMachine
-from deployment.base import Deployment
+from deployment.base import test_deployment_factory, production_deployment_factory
 
 
 class Project(BaseProject):
@@ -13,12 +12,5 @@ class Project(BaseProject):
     supervisor_name = '%(supervisor_name)s'
 
 
-class TestDeployment(Deployment, TestMachine, Project):
-    pass
-
-
-class ProdDeployment(Deployment, ProductionMachine, Project):
-    pass
-
-{{ project_name }}_on_test = TestDeployment()
-{{ project_name }}_on_production = ProdDeployment()
+test = test_deployment_factory(Project)()
+prod = production_deployment_factory(Project)()
