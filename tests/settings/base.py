@@ -21,3 +21,4 @@ CACHES = {
 MEDIA_ROOT = join(DEV_TMP_DIR, 'test_media')
 
 INSTALLED_APPS = exclude(INSTALLED_APPS, ['south', 'haystack'])
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'

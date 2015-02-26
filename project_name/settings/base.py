@@ -89,7 +89,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'raven.contrib.django.middleware.SentryResponseErrorIdMiddleware',
@@ -105,7 +105,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
-    #'django.core.context_processors.request',
+    # 'django.core.context_processors.request',
     # static/media url, debug variables etc.
     '{{ project_name }}.context_processors.settings_variables',
 )
@@ -121,14 +121,15 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
 
-    'south',
     'raven.contrib.django',
-    #'taggit',
+    # 'taggit',
 
     '{{ project_name }}',
 
     'sorl.thumbnail',
 )
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
@@ -169,4 +170,4 @@ LOGGING = {
 }
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-#THUMBNAIL_ORIENTATION = False
+# THUMBNAIL_ORIENTATION = False
