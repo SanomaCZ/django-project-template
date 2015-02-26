@@ -6,8 +6,8 @@ from distutils.core import Command
 import {{ project_name }}
 
 install_requires = [
-    #'uwsgi==2.0.5.1',
-    'gunicorn 19.1'
+    #'uwsgi==2.0.9',
+    'gunicorn 19.2.1'
 ]
 with open(join(dirname(__file__), 'requirements.txt')) as req_file:
     for l in req_file.readlines():
