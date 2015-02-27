@@ -10,7 +10,7 @@ dist/
 */project_static/css/*.less
 */project_static/less/*.css
 
-{{ project_name }}/project_static/js/common.js
+{{ project_name }}/project_static/js/common.min.js
 {{ project_name }}/project_static/js/app-built.js
 
 .coverage
