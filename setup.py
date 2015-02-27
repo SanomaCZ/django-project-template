@@ -54,16 +54,16 @@ class BumpVersion(Command):
             istr = istr.replace(str(v), str(new_version))
 
         with open(initfile, 'w') as ifile:
-            print "Writing new init file with version %s..." % new_version_str
+            print "Writing new init file with version %%s..." %% new_version_str
             ifile.write(istr)
 
         if self.commit:
             print "Committing version file to VCS..."
-            system('git commit %s -m "Version bump %s"' % (initfile, new_version_str))
+            system('git commit %%s -m "Version bump %%s"' %% (initfile, new_version_str))
 
         if self.tag:
-            print "Creating tag r/%s in VCS..." % new_version_str
-            system('git tag r/%s' % new_version_str)
+            print "Creating tag r/%%s in VCS..." %% new_version_str
+            system('git tag r/%%s' %% new_version_str)
 
 
 class MakeStatic(Command):
@@ -83,16 +83,16 @@ class MakeStatic(Command):
             'lessc_opts': '--compress --clean-css --verbose -O2',
             'minjs_opts': '-mc'
         }
-        system('lessc %(lessc_opts)s %(pth)s/less/master.less %(pth)s/css/master.css' % params)
+        system('lessc %%(lessc_opts)s %%(pth)s/less/master.less %%(pth)s/css/master.css' %% params)
 
         # minify javascript according to .../_dev/build.json to `.../js/$key.min.js`
         build_file = join(params['pth'], '_dev', 'build.json')
         js_dir = join(params['pth'], 'js')
         with open(build_file, 'r') as fp:
             for outfile, files in json.load(fp).iteritems():
-                system('uglifyjs %(files)s %(opts)s -o %(output)s' % {
+                system('uglifyjs %%(files)s %%(opts)s -o %%(output)s' %% {
                     'files': ' '.join(join(params['pth'], f) for f in files),
-                    'output': join(js_dir, '%s.min.js' % outfile),
+                    'output': join(js_dir, '%%s.min.js' %% outfile),
                     'opts': params['minjs_opts'],
                 })
 
