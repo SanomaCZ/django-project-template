@@ -92,7 +92,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'raven.contrib.django.middleware.SentryResponseErrorIdMiddleware',
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -121,7 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
 
-    'raven.contrib.django',
+    'raven.contrib.django.raven_compat',
     # 'taggit',
 
     '{{ project_name }}',
@@ -164,7 +164,7 @@ LOGGING = {
         },
         'sentry': {
             'level': 'ERROR',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
         },
     },
 }

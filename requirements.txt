@@ -1,6 +1,6 @@
-Django>=1.7,<1.8
+Django>=1.8,<1.9
 Pillow==2.7.0
-raven==5.2.0
+raven==3.5.2
 
 hiredis
 redis==2.10.3
@@ -8,4 +8,3 @@ django-redis==3.8.3
 #django-taggit==0.12
 sorl-thumbnail==12.2
 markdown2==2.2.1
-templatefinder
