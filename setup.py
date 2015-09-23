@@ -49,20 +49,20 @@ class BumpVersion(Command):
         initfile = join(dirname({{ project_name }}.__file__), '__init__.py')
 
         with open(initfile, 'r') as ifile:
-            print "Reading old package init file..."
+            print("Reading old package init file...")
             istr = ifile.read()
             istr = istr.replace(str(v), str(new_version))
 
         with open(initfile, 'w') as ifile:
-            print "Writing new init file with version %%s..." %% new_version_str
+            print("Writing new init file with version %%s..." %% new_version_str)
             ifile.write(istr)
 
         if self.commit:
-            print "Committing version file to VCS..."
+            print("Committing version file to VCS...")
             system('git commit %%s -m "Version bump %%s"' %% (initfile, new_version_str))
 
         if self.tag:
-            print "Creating tag r/%%s in VCS..." %% new_version_str
+            print("Creating tag r/%%s in VCS..." %% new_version_str)
             system('git tag r/%%s' %% new_version_str)
 
 
@@ -89,7 +89,7 @@ class MakeStatic(Command):
         build_file = join(params['pth'], '_dev', 'build.json')
         js_dir = join(params['pth'], 'js')
         with open(build_file, 'r') as fp:
-            for outfile, files in json.load(fp).iteritems():
+            for outfile, files in json.load(fp).items():
                 system('uglifyjs %%(files)s %%(opts)s -o %%(output)s' %% {
                     'files': ' '.join(join(params['pth'], f) for f in files),
                     'output': join(js_dir, '%%s.min.js' %% outfile),
@@ -129,7 +129,9 @@ setup(
         "Framework :: Django",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
