@@ -2,7 +2,7 @@
 # fab test:update --hosts="lala@test.smdev.cz"
 
 from deployment.projects import ManagePyProject as BaseProject
-from deployment.base import test_deployment_factory, production_deployment_factory
+from deployment.base import test_dj_deployment_factory, production_dj_deployment_factory
 
 
 class Project(BaseProject):
@@ -12,5 +12,5 @@ class Project(BaseProject):
     supervisor_name = '%(supervisor_name)s'
 
 
-test = test_deployment_factory(Project)()
-prod = production_deployment_factory(Project)()
+test = test_dj_deployment_factory(Project)()
+prod = production_dj_deployment_factory(Project)()
